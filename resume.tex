@@ -1,0 +1,225 @@
+\documentclass[10pt, letterpaper]{article}
+
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 79, 144} % define primary color
+\definecolor{secondaryColor}{RGB}{100, 100, 100} % secondary color for subtle elements
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Rui Valente's CV},
+    pdfauthor={Rui Valente},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+\ifPDFTeX%
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0cm} % set column seperation
+\makeatletter
+\let\ps@customFooterStyle\ps@plain% Copy the plain style to customFooterStyle
+\patchcmd{\ps@customFooterStyle}{\thepage}{
+    \color{gray}\textit{\small Page \thepage{} of \pageref*{LastPage}}
+}{}{} % replace number by desired string
+\makeatother
+\pagestyle{customFooterStyle}
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.4 cm
+}{
+    % bottom space:
+    0.25 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\circ$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0.4 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0.2 cm + 0.00001 cm
+    }{
+        0.2 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry%
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn\raggedleft\secondColumn%
+    \end{paracol}
+    \endonecolentry%
+} % new environment for two column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep%
+} % new environment for the header
+
+\let\hrefWithoutArrow\href%
+
+\renewcommand{\href}[2]{\hrefWithoutArrow{#1}{\ifthenelse{\equal{#2}{}}{ }{#2 }\raisebox{.15ex}{\footnotesize \faExternalLink*}}}
+
+\begin{document}
+    \begin{header}
+        \textbf{\fontsize{24 pt}{24 pt}\selectfont Rui Valente}
+
+        \vspace{0.3 cm}
+
+        \normalsize
+                \mbox{\hrefWithoutArrow{https://ruivalente.com}{\color{black}{\footnotesize\faGlobe}\hspace*{0.13cm}ruivalente.com}}%
+        \kern0.25 cm%
+  \mbox{\hrefWithoutArrow{mailto:email@ruivalente.com}{\color{black}{\footnotesize\faEnvelope[regular]}\hspace*{0.13cm}email@ruivalente.com}}%
+         \kern0.25 cm%
+         \kern0.25 cm%
+        \mbox{\hrefWithoutArrow{https://linkedin.com/in/ruivalente99}{\color{black}{\footnotesize\faLinkedinIn}\hspace*{0.13cm}ruivalente99}}%
+         \kern0.25 cm%
+         \kern0.25 cm%
+        \mbox{\hrefWithoutArrow{https://github.com/ruivalente99}{\color{black}{\footnotesize\faGithub}\hspace*{0.13cm}ruivalente99}}%
+        \kern0.25 cm%
+    \end{header}
+
+    \vspace{0.2cm}
+
+    \section{Profile}
+    \begin{onecolentry}
+        \textit{Frontend Software Engineer specialized in React and TypeScript with 3+ years of professional experience.} Architect of responsive, performance-optimized web applications with expertise in modern JavaScript frameworks. Proven ability to collaborate cross-functionally while delivering clean, maintainable code. Seeking opportunities to leverage technical expertise and problem-solving abilities to create exceptional digital experiences.
+    \end{onecolentry}
+
+    \section{Experience}
+    \begin{twocolentry}{\textit{Vila Real -- Hybrid} \\ \textit{Jun 2022 -- Present}}
+        \textbf{Frontend Engineer} \\
+            \textit{\href{https://openvia.io}{Openvia}}
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Led development of a customer-facing web application that increased user engagement, using React, TypeScript, and Bootstrap.
+            \item Improved application performance through implementation of efficient component architecture and code-splitting techniques.
+            \item Developed custom GraphQL queries and RESTful API integrations.
+            \item Modernized legacy applications with Ionic and Angular.
+            \item Implemented comprehensive Jest testing suite.
+            \item Established CI/CD pipelines with Jenkins and Docker.
+        \end{highlights}
+    \end{onecolentry}
+
+    \vspace{0.2 cm}
+
+    \begin{twocolentry}{\textit{Vila Real -- Remote} \\ \textit{Aug 2021 -- May 2022}}
+        \textbf{Junior Software Engineer} \\
+        \textit{\href{https://www.neoception.com/}{Neoception GmbH}}
+    \end{twocolentry}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Developed responsive web applications using React and JavaScript.
+            \item Implemented reusable component library with Material UI.
+            \item Collaborated in an agile team environment with daily stand-ups and bi-weekly sprints.
+            \item Contributed to code reviews and unit testing processes that improved overall code quality.
+        \end{highlights}
+    \end{onecolentry}
+
+    \section{Education}
+    \begin{twocolentry}{\textit{2021 -- Present}}
+        \textbf{Master's Degree in Informatics Engineering} \\
+            \textit{\href{https://www.utad.pt}{University of Tr\'as-os-Montes and Alto Douro}}
+    \end{twocolentry}
+
+    \vspace{0.1 cm}
+
+    \begin{twocolentry}{\textit{2018 -- 2021}}
+        \textbf{Bachelor's Degree in Informatics Engineering} \\
+            \textit{\href{https://www.utad.pt}{University of Tr\'as-os-Montes and Alto Douro}}
+    \end{twocolentry}
+
+    \section{Certifications}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Fullstack TypeScript (GraphQL and Node.js)
+            \item Complete Intro to React v9
+            \item Project Management: Beginner to PM
+            \item JavaScript (Intermediate)
+            \item JavaScript (Basic)
+        \end{highlights}
+    \end{onecolentry}
+
+    \section{Activities and Interests}
+    \begin{onecolentry}
+        \begin{highlights}
+            \item Speaker at UTAD SUMMIT in \href{https://www.utad.pt}{University of Tr\'as-os-Montes and Alto Douro} (2025)
+            \item Speaker at Fullstack AI Development at SEI in \href{https://www.uminho.pt/PT}{University of Minho} (2025)
+            \item Speaker at Git and Web Dev Workshops at UTAD SUMMIT in \href{https://www.utad.pt}{University of Tr\'as-os-Montes and Alto Douro} (2023)
+            \item Volunteer at DSAI and TECH-EDU events (2020)
+        \end{highlights}
+    \end{onecolentry}
+
+    \section{Technical Skills}
+    \begin{onecolentry}
+        \textbf{Languages \& Frameworks:} React, Next.js, Node.js, TypeScript, JavaScript, tRPC, Angular, HTML5, CSS3/SCSS, Material UI, Bootstrap\\
+        \textbf{Tools \& Platforms:} Docker, Jenkins, AWS, Jira, Sonarqube, Git, GitHub Actions, VS Code, Webpack, Jest \\
+        \textbf{Methodologies:} Agile/Scrum, CI/CD, Test-Driven Development, Responsive Design, Component-Driven Development, RESTful API Design
+    \end{onecolentry}
+\end{document}
