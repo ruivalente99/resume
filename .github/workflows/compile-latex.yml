@@ -2,7 +2,7 @@ name: Compile LaTeX to PDF
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main" ]
     paths:
       - '**.tex'
 
